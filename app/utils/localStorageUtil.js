@@ -2,6 +2,7 @@ class LocalStorageUtil {
   constructor() {
     this.keyName = "products";
   }
+
   getProducts() {
     const productsLocalStorage = localStorage.getItem(this.keyName);
     if (productsLocalStorage !== null) {
@@ -9,6 +10,7 @@ class LocalStorageUtil {
     }
     return [];
   }
+
   putProducts(id) {
     let products = this.getProducts();
     let pushProduct = false;
