@@ -1,8 +1,24 @@
 class Products {
+  constructor() {
+    this.classNameActive = "products-element__btn_activ";
+    this.labelAdd = "Додати в кошик";
+    this.labelRemove = "Видалити з кошику";
+  }
   render() {
+    const productsStore = localStorageUtil.getProducts();
     let htmlCatalog = "";
 
     CATALOG.forEach(({ id, name, price, img }) => {
+      let activeClass = "";
+      let activeText = "";
+
+      if (productsStore.indexOf(id) === -1) {
+        activeText = this.labelAdd;
+      } else {
+        activeClass = " " + this.classNameActive;
+        activeText = this.labelRemove;
+      }
+
       htmlCatalog += `
       <li class='products-element'>
           <span class='products-element__name'>${name}</span>
@@ -10,7 +26,7 @@ class Products {
           <span class='products-element__price'>
           ⚡️ ${price.toLocaleString()} USD
           </span>
-          <button class='products-element__btn'>Додати в кошик</button>
+          <button class='products-element__btn${activeClass}'>${activeText}</button>
       </li>
       `;
     });
